@@ -1,4 +1,4 @@
-import { RollupWatchOptions, InputOptions, OutputOptions } from 'rollup'
+import { RollupWatchOptions, InputOptions, OutputOptions, Plugin } from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
 import autoExternal from '@liangchun/rollup-plugin-auto-external'
@@ -9,40 +9,29 @@ import json from 'rollup-plugin-json'
 import { paths } from './paths'
 import { overrideOnWarn } from '../util/overrides'
 
-export function createWatchConfiguration(): RollupWatchOptions {
-  return {
-    input: paths.appEntry,
-    output: {
-      file: paths.appDevBundle,
-      format: 'cjs',
-      sourcemap: 'inline',
-    },
-    plugins: [
-      resolve(),
-      commonjs(),
-      json(),
-      autoExternal({
-        packagePath: paths.appPackageJson,
-        resolveOpts: {
-          paths: [paths.projectPath],
-        },
-      }),
-      typescript({
-        tsconfig: paths.appTsConfig,
-      }),
-    ],
-    watch: {
-      /**
-       * TODO: switch to true once rollup can correctly resolve `chokidar`
-       * https://github.com/rollup/rollup/issues/2934
-       */
-      chokidar: false,
-    },
-    onwarn: overrideOnWarn,
-  }
+export enum ConfigurationType {
+  DEV = 'DEV',
+  PROD = 'PROD',
 }
 
-export function createBuildConfiguration() {
+export type Configuration =
+  | {
+      type: ConfigurationType.PROD
+      inputOptions: InputOptions
+      outputOptions: OutputOptions
+    }
+  | {
+      type: ConfigurationType.DEV
+      watchOptions: RollupWatchOptions
+    }
+
+export type ConfigurationOptions = {
+  dev: boolean
+}
+
+export function createConfiguration(opts: ConfigurationOptions): Configuration {
+  const { dev } = opts
+
   const inputOptions: InputOptions = {
     input: paths.appEntry,
     plugins: [
@@ -58,17 +47,37 @@ export function createBuildConfiguration() {
       typescript({
         tsconfig: paths.appTsConfig,
       }),
-      terser(),
-    ],
+      !dev && terser(),
+    ].filter(Boolean) as Plugin[],
     onwarn: overrideOnWarn,
   }
+
   const outputOptions: OutputOptions = {
-    file: paths.appProdBundle,
+    file: dev ? paths.appDevBundle : paths.appProdBundle,
     format: 'cjs',
-    sourcemap: true,
+    sourcemap: dev ? 'inline' : true,
   }
-  return {
-    inputOptions,
-    outputOptions,
-  }
+
+  return dev
+    ? {
+        type: ConfigurationType.DEV,
+        watchOptions: {
+          ...inputOptions,
+          output: outputOptions,
+          ...{
+            watch: {
+              /**
+               * TODO: switch to true once rollup can correctly resolve `chokidar`
+               * https://github.com/rollup/rollup/issues/2934
+               */
+              chokidar: false,
+            },
+          },
+        },
+      }
+    : {
+        type: ConfigurationType.PROD,
+        inputOptions,
+        outputOptions,
+      }
 }

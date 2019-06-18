@@ -1,7 +1,7 @@
-import stripAnsi from 'strip-ansi'
-import chalk from 'chalk'
 import * as fs from 'fs'
 import * as os from 'os'
+import stripAnsi from 'strip-ansi'
+import chalk from 'chalk'
 import { codeFrameColumns } from '@babel/code-frame'
 
 /**
