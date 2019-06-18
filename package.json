@@ -1,6 +1,6 @@
 {
   "name": "twirler",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "build/bundle.js",
   "license": "MIT",
   "bin": "./bin/twirler.js",
