@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "commonjs",
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src",
+    "vendor"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
+}
