@@ -4,3 +4,4 @@ commitlint.config.js
 vendor
 test
 node_modules
+.github
