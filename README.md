@@ -1,1 +1,2 @@
 # twirler
+[![Build Status](https://travis-ci.com/liangchunn/twirler.svg?branch=master)](https://travis-ci.com/liangchunn/twirler) [![npm](https://img.shields.io/npm/v/twirler.svg)](https://www.npmjs.com/package/twirler) [![install size](https://packagephobia.now.sh/badge?p=twirler)](https://packagephobia.now.sh/result?p=twirler) [![Known Vulnerabilities](https://snyk.io/test/github/liangchunn/twirler/badge.svg)](https://snyk.io/test/github/liangchunn/twirler)

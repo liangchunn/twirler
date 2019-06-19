@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`base-template should generate correct bundles on dev mode 1`] = `
+"'use strict';
+
+function adder(a, b) {
+    return a + b;
+}
+
+console.log('Hello, world!');
+console.log(adder(2, 4));
+"
+`;
+
+exports[`base-template should generate correct bundles on prod mode 1`] = `
+"\\"use strict\\";function adder(o,e){return o+e}console.log(\\"Hello, world!\\"),console.log(adder(2,4));
+"
+`;

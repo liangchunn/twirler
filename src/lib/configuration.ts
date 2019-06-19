@@ -14,6 +14,11 @@ export enum ConfigurationType {
   PROD = 'PROD',
 }
 
+export type BaseConfiguration = {
+  inputOptions: InputOptions
+  outputOptions: OutputOptions
+}
+
 export type Configuration =
   | {
       type: ConfigurationType.PROD
@@ -29,23 +34,26 @@ export type ConfigurationOptions = {
   dev: boolean
 }
 
-export function createConfiguration(opts: ConfigurationOptions): Configuration {
+export function createBaseConfiguration(
+  opts: ConfigurationOptions,
+  path: typeof paths
+): BaseConfiguration {
   const { dev } = opts
 
   const inputOptions: InputOptions = {
-    input: paths.appEntry,
+    input: path.appEntry,
     plugins: [
       resolve(),
       commonjs(),
       json(),
       autoExternal({
-        packagePath: paths.appPackageJson,
+        packagePath: path.appPackageJson,
         resolveOpts: {
-          paths: [paths.projectPath],
+          paths: [path.projectPath],
         },
       }),
       typescript({
-        tsconfig: paths.appTsConfig,
+        tsconfig: path.appTsConfig,
       }),
       !dev && terser(),
     ].filter(Boolean) as Plugin[],
@@ -53,10 +61,20 @@ export function createConfiguration(opts: ConfigurationOptions): Configuration {
   }
 
   const outputOptions: OutputOptions = {
-    file: dev ? paths.appDevBundle : paths.appProdBundle,
+    file: dev ? path.appDevBundle : path.appProdBundle,
     format: 'cjs',
     sourcemap: dev ? 'inline' : true,
   }
+
+  return {
+    inputOptions,
+    outputOptions,
+  }
+}
+
+export function createConfiguration(opts: ConfigurationOptions): Configuration {
+  const { dev } = opts
+  const { inputOptions, outputOptions } = createBaseConfiguration(opts, paths)
 
   return dev
     ? {

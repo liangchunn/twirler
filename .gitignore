@@ -1,4 +1,11 @@
-node_modules
 .rpt2_cache
+.vscode
+node_modules
 build
 dist
+
+.DS_Store
+yarn-error.log
+package-lock.json
+
+!test/fixtures/**/node_modules

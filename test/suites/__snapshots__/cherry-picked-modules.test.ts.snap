@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cherry-picked-modules should generate correct bundles on dev mode 1`] = `
+"'use strict';
+
+var foo = require('foo');
+var deepFoo = require('foo/foo');
+
+console.log(foo);
+console.log(deepFoo);
+"
+`;
+
+exports[`cherry-picked-modules should generate correct bundles on prod mode 1`] = `
+"\\"use strict\\";var foo=require(\\"foo\\"),deepFoo=require(\\"foo/foo\\");console.log(foo),console.log(deepFoo);
+"
+`;
