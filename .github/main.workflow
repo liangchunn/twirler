@@ -10,9 +10,17 @@ action "install" {
   args = "install"
 }
 
+# test with yarn
+action "test" {
+  needs = "install"
+  uses = "actions/npm@1.0.0"
+  runs = "yarn"
+  args = "test"
+}
+
 # filter for a new tag
 action "check for new tag" {
-  needs = "install"
+  needs = "test"
   uses = "actions/bin/filter@master"
   args = "tag"
 }
