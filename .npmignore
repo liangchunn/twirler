@@ -5,3 +5,7 @@ vendor
 test
 node_modules
 .github
+.DS_Store
+.gitattributes
+.travis.yml
+jest.config.js

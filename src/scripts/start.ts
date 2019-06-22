@@ -1,7 +1,7 @@
 import * as rollup from 'rollup'
 
 import { createConfiguration, ConfigurationType } from '../lib/configuration'
-import { watchHandler } from '../util/watchHandler'
+import { createWatchHandler } from '../util/watchHandler'
 
 function start() {
   const config = createConfiguration({ dev: true })
@@ -12,9 +12,10 @@ function start() {
     )
   }
 
+  const outputBundlePath = config.watchOptions.output.file!
   const watcher = rollup.watch([config.watchOptions])
 
-  watcher.on('event', watchHandler)
+  watcher.on('event', createWatchHandler(outputBundlePath))
 }
 
 start()

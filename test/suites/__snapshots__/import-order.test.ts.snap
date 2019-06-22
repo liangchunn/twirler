@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`import-order should generate correct bundles on dev mode 1`] = `
+"'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var debug = _interopDefault(require('debug'));
+
+process.env.NODE_ENV = 'development';
+
+debug();
+"
+`;
+
+exports[`import-order should generate correct bundles on prod mode 1`] = `
+"\\"use strict\\";function _interopDefault(e){return e&&\\"object\\"==typeof e&&\\"default\\"in e?e.default:e}var debug=_interopDefault(require(\\"debug\\"));process.env.NODE_ENV=\\"development\\",debug();
+"
+`;

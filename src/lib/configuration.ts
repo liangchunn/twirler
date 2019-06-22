@@ -72,12 +72,12 @@ export function createBaseConfiguration(
   }
 }
 
-export function createConfiguration(opts: ConfigurationOptions): Configuration {
+export function createConfiguration(opts: ConfigurationOptions) {
   const { dev } = opts
   const { inputOptions, outputOptions } = createBaseConfiguration(opts, paths)
 
   return dev
-    ? {
+    ? ({
         type: ConfigurationType.DEV,
         watchOptions: {
           ...inputOptions,
@@ -92,10 +92,10 @@ export function createConfiguration(opts: ConfigurationOptions): Configuration {
             },
           },
         },
-      }
-    : {
+      } as const)
+    : ({
         type: ConfigurationType.PROD,
         inputOptions,
         outputOptions,
-      }
+      } as const)
 }

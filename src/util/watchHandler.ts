@@ -11,10 +11,7 @@ import {
   WatcherErrorEvent,
   WatcherFatalEvent,
 } from './types'
-
-const state: WatcherState = {
-  firstCompilation: true,
-}
+import { ProcessHandler } from './processHandler'
 
 function bundleEndHandler(event: WatcherBundleEndEvent): void {
   console.log(
@@ -22,6 +19,7 @@ function bundleEndHandler(event: WatcherBundleEndEvent): void {
       `(${event.duration}ms)`
     )}`
   )
+  console.log()
 }
 
 function bundleStartHandler(state: WatcherState): void {
@@ -53,22 +51,37 @@ export function fatalHandler(event: WatcherFatalEvent): void {
   process.exit(1)
 }
 
-export function watchHandler(event: WatcherEventTypes) {
-  switch (event.code) {
-    case WatcherEventCodes.BUNDLE_START: {
-      clearConsole()
-      return bundleStartHandler(state)
-    }
-    case WatcherEventCodes.BUNDLE_END: {
-      clearConsole()
-      return bundleEndHandler(event)
-    }
-    case WatcherEventCodes.ERROR: {
-      clearConsole()
-      return errorHandler(event)
-    }
-    case WatcherEventCodes.FATAL: {
-      return fatalHandler(event)
+export function createWatchHandler(outputBundlePath: string) {
+  const processHandler = new ProcessHandler(outputBundlePath, [])
+  const state: WatcherState = {
+    firstCompilation: true,
+  }
+  return (event: WatcherEventTypes): void => {
+    switch (event.code) {
+      case WatcherEventCodes.BUNDLE_START: {
+        clearConsole()
+        bundleStartHandler(state)
+        processHandler.stopApp()
+        return
+      }
+      case WatcherEventCodes.BUNDLE_END: {
+        clearConsole()
+        bundleEndHandler(event)
+        processHandler.runApp()
+        return
+      }
+      case WatcherEventCodes.ERROR: {
+        clearConsole()
+        errorHandler(event)
+        processHandler.stopApp()
+        return
+      }
+      case WatcherEventCodes.FATAL: {
+        fatalHandler(event)
+        processHandler.stopApp()
+        process.exit(1)
+        return
+      }
     }
   }
 }

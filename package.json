@@ -19,6 +19,7 @@
     "@liangchun/rollup-plugin-auto-external": "^3.0.0-alpha.1",
     "chalk": "^2.4.2",
     "filesize": "^4.1.2",
+    "pstree.remy": "^1.1.7",
     "rollup": "^1.15.6",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-json": "^4.0.0",

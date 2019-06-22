@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "esnext",
+    "target": "es6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "noEmitOnError": true,
+    "sourceMap": true,
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
