@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`builtins should not include builtins on dev mode 1`] = `
+"'use strict';
+
+var os = require('os');
+var path = require('path');
+var fs = require('fs');
+
+function safeFileRead(path, options) {
+    try {
+        return fs.readFileSync(path, options);
+    }
+    catch (e) {
+        return null;
+    }
+}
+
+const zshrc = path.join(os.homedir(), '.zshrc');
+console.log(safeFileRead(zshrc, { encoding: 'utf-8' }));
+"
+`;
+
+exports[`builtins should not include builtins on prod mode 1`] = `
+"\\"use strict\\";var os=require(\\"os\\"),path=require(\\"path\\"),fs=require(\\"fs\\");function safeFileRead(e,r){try{return fs.readFileSync(e,r)}catch(e){return null}}const zshrc=path.join(os.homedir(),\\".zshrc\\");console.log(safeFileRead(zshrc,{encoding:\\"utf-8\\"}));
+"
+`;

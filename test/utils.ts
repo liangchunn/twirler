@@ -5,7 +5,7 @@ import * as rollup from 'rollup'
 import { paths } from '../src/lib/paths'
 import { BaseConfiguration } from '../src/lib/configuration'
 
-export async function bundle(
+export async function bundleFixtures(
   appPaths: typeof paths,
   baseConfig: BaseConfiguration
 ) {
