@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/liangchunn/twirler/compare/v0.0.2...v0.0.3) (2019-06-22)
+
+
+### Features
+
+* **package:** add bundle size stat, add builtins test ([6dce3d5](https://github.com/liangchunn/twirler/commit/6dce3d5))
+
+
+
 ## [0.0.2](https://github.com/liangchunn/twirler/compare/v0.0.1...v0.0.2) (2019-06-18)
 
 
