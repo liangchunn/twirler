@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'production'
 import os from 'os'
 import path from 'path'
 import chalk from 'chalk'

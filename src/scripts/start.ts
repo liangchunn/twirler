@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'development'
 import * as rollup from 'rollup'
 
 import { createConfiguration, ConfigurationType } from '../lib/configuration'
