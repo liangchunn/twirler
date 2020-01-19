@@ -1,13 +1,13 @@
-import { RollupWatchOptions, InputOptions, OutputOptions, Plugin } from 'rollup'
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
 import autoExternal from '@liangchun/rollup-plugin-auto-external'
-import typescript from 'rollup-plugin-typescript2'
+import { InputOptions, OutputOptions, Plugin, RollupWatchOptions } from 'rollup'
+import commonjs from '@rollup/plugin-commonjs'
+import del from 'rollup-plugin-delete'
+import json from '@rollup/plugin-json'
+import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
-import json from 'rollup-plugin-json'
-
-import { paths } from './paths'
+import typescript from 'rollup-plugin-typescript2'
 import { overrideOnWarn } from '../util/overrides'
+import { paths } from './paths'
 
 export enum ConfigurationType {
   DEV = 'DEV',
@@ -43,6 +43,7 @@ export function createBaseConfiguration(
   const inputOptions: InputOptions = {
     input: path.appEntry,
     plugins: [
+      del({ targets: 'build/*' }),
       resolve(),
       commonjs(),
       json(),

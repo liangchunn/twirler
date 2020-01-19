@@ -3,15 +3,9 @@ import typescript from 'typescript'
 import chalk from 'chalk'
 import { clearConsole } from './console'
 import { rpt2Formatter } from './rpt2Formatter'
-import {
-  WatcherEventTypes,
-  WatcherEventCodes,
-  WatcherBundleEndEvent,
-  WatcherState,
-  WatcherErrorEvent,
-  WatcherFatalEvent,
-} from './types'
+import { WatcherBundleEndEvent, WatcherState, WatcherErrorEvent } from './types'
 import { ProcessHandler } from './processHandler'
+import { RollupWatcherEvent } from 'rollup'
 
 function bundleEndHandler(event: WatcherBundleEndEvent): void {
   console.log(
@@ -44,42 +38,29 @@ function errorHandler(event: WatcherErrorEvent): void {
   }
 }
 
-export function fatalHandler(event: WatcherFatalEvent): void {
-  const { error } = event
-  console.log(chalk.redBright('A fatal error has occurred.'), os.EOL)
-  console.error(error.stack)
-  process.exit(1)
-}
-
 export function createWatchHandler(outputBundlePath: string) {
   const processHandler = new ProcessHandler(outputBundlePath, [])
   const state: WatcherState = {
     firstCompilation: true,
   }
-  return (event: WatcherEventTypes): void => {
+  return (event: RollupWatcherEvent): void => {
     switch (event.code) {
-      case WatcherEventCodes.BUNDLE_START: {
+      case 'START': {
         clearConsole()
         bundleStartHandler(state)
         processHandler.stopApp()
         return
       }
-      case WatcherEventCodes.BUNDLE_END: {
+      case 'BUNDLE_END': {
         clearConsole()
         bundleEndHandler(event)
         processHandler.runApp()
         return
       }
-      case WatcherEventCodes.ERROR: {
+      case 'ERROR': {
         clearConsole()
         errorHandler(event)
         processHandler.stopApp()
-        return
-      }
-      case WatcherEventCodes.FATAL: {
-        fatalHandler(event)
-        processHandler.stopApp()
-        process.exit(1)
         return
       }
     }

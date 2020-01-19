@@ -3,7 +3,7 @@ import os from 'os'
 import path from 'path'
 import chalk from 'chalk'
 import typescript from 'typescript'
-import * as rollup from 'rollup'
+import { rollup } from 'rollup'
 
 import { createConfiguration, ConfigurationType } from '../lib/configuration'
 import { paths } from '../lib/paths'
@@ -22,17 +22,17 @@ async function build() {
     const { inputOptions, outputOptions } = config
 
     const outputBundle = outputOptions.file!
-    const sizeBeforeBuild = getBundleSize(outputBundle)
+    const sizeBeforeBuild = await getBundleSize(outputBundle)
 
     console.log(chalk.cyan('Creating optimized production build...'))
     console.log(`Using TypeScript v${typescript.version}`)
     console.log()
 
-    const bundle = await rollup.rollup(inputOptions)
+    const bundle = await rollup(inputOptions)
     await bundle.generate(outputOptions)
     await bundle.write(outputOptions)
 
-    const sizeAfterBuild = getBundleSize(outputBundle)
+    const sizeAfterBuild = await getBundleSize(outputBundle)
 
     console.log(
       chalk.green(

@@ -10,7 +10,8 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "importHelpers": true
   },
   "include": [
     "src",

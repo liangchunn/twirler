@@ -12,6 +12,6 @@ console.log(deepFoo);
 `;
 
 exports[`cherry-picked-modules should generate correct bundles on prod mode 1`] = `
-"\\"use strict\\";var foo=require(\\"foo\\"),deepFoo=require(\\"foo/foo\\");console.log(foo),console.log(deepFoo);
+"\\"use strict\\";var o=require(\\"foo\\"),e=require(\\"foo/foo\\");console.log(o),console.log(e);
 "
 `;

@@ -1,5 +1,5 @@
-import * as os from 'os'
+import { platform } from 'os'
 
 export function isWindows() {
-  return os.platform() === 'win32'
+  return platform() === 'win32'
 }

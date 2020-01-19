@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as os from 'os'
+import { existsSync, readFileSync } from 'fs'
+import { EOL } from 'os'
 import stripAnsi from 'strip-ansi'
 import chalk from 'chalk'
 import { codeFrameColumns } from '@babel/code-frame'
@@ -16,7 +16,7 @@ export function rpt2Formatter(rawError: string, file: string) {
   const tsmessage = error.match(/(?<=TS(\d)+: )([\s\S])+/)
   const tscode = error.match(/TS(\d)+/)
 
-  const source = file && fs.existsSync(file) && fs.readFileSync(file, 'utf-8')
+  const source = file && existsSync(file) && readFileSync(file, 'utf-8')
 
   if (source && lines && tsmessage && tscode) {
     const frame = codeFrameColumns(
@@ -33,12 +33,12 @@ export function rpt2Formatter(rawError: string, file: string) {
     )
     return (
       chalk.underline(file + `(${lines[1]},${lines[2]})`) +
-      os.EOL +
+      EOL +
       tsmessage[0] +
       ' ' +
       chalk.cyan(`(${tscode[0]})`) +
-      os.EOL +
-      os.EOL +
+      EOL +
+      EOL +
       frame
     )
   } else {

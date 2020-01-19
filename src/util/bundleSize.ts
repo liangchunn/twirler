@@ -1,15 +1,15 @@
 import chalk from 'chalk'
 import filesize from 'filesize'
-import * as fs from 'fs'
+import { stat } from 'fs-extra'
 
 interface FileSizeObjectOutput {
   value: number
   symbol: string
 }
 
-export const getBundleSize = (fileName: string) => {
+export const getBundleSize = async (fileName: string) => {
   try {
-    const read = fs.statSync(fileName)
+    const read = await stat(fileName)
     return read.size
   } catch (e) {
     return null

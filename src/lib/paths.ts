@@ -1,16 +1,15 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import { realpathSync } from 'fs-extra'
+import { resolve, join } from 'path'
 
-const appDirectory = fs.realpathSync(process.cwd())
-const useTemplate =
-  appDirectory === fs.realpathSync(path.join(__dirname, '../..'))
+const appDirectory = realpathSync(process.cwd())
+const useTemplate = appDirectory === realpathSync(join(__dirname, '../..'))
 
 function resolveApp(relativePath: string): string {
-  return path.resolve(appDirectory, relativePath)
+  return resolve(appDirectory, relativePath)
 }
 
 function resolveOwn(relativePath: string): string {
-  return path.resolve(__dirname, '../..', relativePath)
+  return resolve(__dirname, '../..', relativePath)
 }
 
 export const paths = useTemplate
@@ -21,7 +20,7 @@ export const paths = useTemplate
       appTsConfig: resolveOwn('template/tsconfig.json'),
       appDevBundle: resolveOwn('template/build/bundle.js'),
       appSrc: resolveOwn('template/src'),
-      appProdBundle: resolveOwn('template/dist/bundle.js'),
+      appProdBundle: resolveOwn('template/build/bundle.prod.js'),
     }
   : {
       projectPath: resolveApp('.'),
@@ -30,5 +29,5 @@ export const paths = useTemplate
       appTsConfig: resolveApp('tsconfig.json'),
       appDevBundle: resolveApp('build/bundle.js'),
       appSrc: resolveApp('src'),
-      appProdBundle: resolveApp('dist/bundle.js'),
+      appProdBundle: resolveApp('build/bundle.prod.js'),
     }

@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'development'
-import * as rollup from 'rollup'
+import { watch } from 'rollup'
 
 import { createConfiguration, ConfigurationType } from '../lib/configuration'
 import { createWatchHandler } from '../util/watchHandler'
@@ -14,7 +14,7 @@ function start() {
   }
 
   const outputBundlePath = config.watchOptions.output.file!
-  const watcher = rollup.watch([config.watchOptions])
+  const watcher = watch([config.watchOptions])
 
   watcher.on('event', createWatchHandler(outputBundlePath))
 }

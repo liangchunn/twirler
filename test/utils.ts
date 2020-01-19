@@ -1,6 +1,6 @@
 import path from 'path'
 
-import * as rollup from 'rollup'
+import { rollup } from 'rollup'
 
 import { paths } from '../src/lib/paths'
 import { BaseConfiguration } from '../src/lib/configuration'
@@ -11,7 +11,7 @@ export async function bundleFixtures(
 ) {
   process.chdir(path.dirname(appPaths.projectPath))
 
-  const bundle = await rollup.rollup(baseConfig.inputOptions)
+  const bundle = await rollup(baseConfig.inputOptions)
   const result = await bundle.generate(baseConfig.outputOptions)
   const code = result.output[0].code
   expect(code).toMatchSnapshot()

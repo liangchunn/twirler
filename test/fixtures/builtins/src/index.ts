@@ -1,8 +1,8 @@
-import * as os from 'os'
-import * as path from 'path'
+import { homedir } from 'os'
+import { join } from 'path'
 
 import { safeFileRead } from './safeFileRead'
 
-const zshrc = path.join(os.homedir(), '.zshrc')
+const zshrc = join(homedir(), '.zshrc')
 
 console.log(safeFileRead(zshrc, { encoding: 'utf-8' }))

@@ -15,18 +15,21 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@babel/code-frame": "^7.0.0",
+    "@babel/code-frame": "^7.8.3",
     "@liangchun/rollup-plugin-auto-external": "^3.0.0-alpha.1",
-    "chalk": "^2.4.2",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-json": "^4.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "chalk": "^3.0.0",
     "filesize": "^4.1.2",
+    "fs-extra": "^8.1.0",
     "pstree.remy": "^1.1.7",
-    "rollup": "^1.15.6",
-    "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.0.3",
-    "rollup-plugin-terser": "^5.0.0",
-    "rollup-plugin-typescript2": "^0.21.1",
-    "strip-ansi": "^5.2.0"
+    "rollup": "^1.29.0",
+    "rollup-plugin-delete": "^1.1.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "strip-ansi": "^6.0.0",
+    "tslib": "^1.10.0"
   },
   "peerDependencies": {
     "typescript": ">=3.x"
@@ -35,17 +38,18 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@types/filesize": "^4.1.0",
-    "@types/jest": "^24.0.15",
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.9.0",
     "@types/node": "^12.0.8",
     "commitizen": "^3.1.1",
     "conventional-changelog-cli": "^2.0.21",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^2.4.1",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "lint-staged": "^8.2.1",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.2"
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.3.0",
+    "typescript": "^3.7.5"
   },
   "engines": {
     "node": ">=8"

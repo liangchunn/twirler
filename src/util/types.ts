@@ -1,38 +1,25 @@
-import { RollupError } from 'rollup'
-
-export enum WatcherEventCodes {
-  START = 'START',
-  END = 'END',
-  BUNDLE_START = 'BUNDLE_START',
-  BUNDLE_END = 'BUNDLE_END',
-  ERROR = 'ERROR',
-  FATAL = 'FATAL',
-}
+import { RollupError, InputOption, RollupBuild } from 'rollup'
 
 export type WatcherStartEvent = {
-  code: WatcherEventCodes.START
+  code: 'START'
 }
 export type WatcherEndEvent = {
-  code: WatcherEventCodes.END
+  code: 'END'
 }
 export type WatcherBundleStartEvent = {
-  code: WatcherEventCodes.BUNDLE_START
-  input: string
-  ouput: string[]
+  code: 'BUNDLE_START'
+  input: InputOption
+  ouput: readonly string[]
 }
 export type WatcherBundleEndEvent = {
-  code: WatcherEventCodes.BUNDLE_END
+  code: 'BUNDLE_END'
   duration: number
-  input: string
-  output: string[]
-  result: any // TODO: don't need this now
+  input: InputOption
+  output: readonly string[]
+  result: RollupBuild
 }
 export type WatcherErrorEvent = {
-  code: WatcherEventCodes.ERROR
-  error: RollupError
-}
-export type WatcherFatalEvent = {
-  code: WatcherEventCodes.FATAL
+  code: 'ERROR'
   error: RollupError
 }
 
@@ -42,7 +29,6 @@ export type WatcherEventTypes =
   | WatcherBundleStartEvent
   | WatcherBundleEndEvent
   | WatcherErrorEvent
-  | WatcherFatalEvent
 
 export type WatcherState = {
   firstCompilation: boolean

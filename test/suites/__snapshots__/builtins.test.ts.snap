@@ -22,6 +22,6 @@ console.log(safeFileRead(zshrc, { encoding: 'utf-8' }));
 `;
 
 exports[`builtins should not include builtins on prod mode 1`] = `
-"\\"use strict\\";var os=require(\\"os\\"),path=require(\\"path\\"),fs=require(\\"fs\\");function safeFileRead(e,r){try{return fs.readFileSync(e,r)}catch(e){return null}}const zshrc=path.join(os.homedir(),\\".zshrc\\");console.log(safeFileRead(zshrc,{encoding:\\"utf-8\\"}));
+"\\"use strict\\";var r=require(\\"os\\"),e=require(\\"path\\"),n=require(\\"fs\\");const t=e.join(r.homedir(),\\".zshrc\\");console.log(function(r,e){try{return n.readFileSync(r,e)}catch(r){return null}}(t,{encoding:\\"utf-8\\"}));
 "
 `;
