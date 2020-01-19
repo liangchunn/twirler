@@ -1,9 +1,11 @@
-## [0.0.3](https://github.com/liangchunn/twirler/compare/v0.0.2...v0.0.3) (2019-06-22)
+## [0.0.4](https://github.com/liangchunn/twirler/compare/v0.0.2...v0.0.4) (2020-01-19)
 
 
 ### Features
 
+* **env:** inject appropriate env for forwarding to watch mode ([c7f46be](https://github.com/liangchunn/twirler/commit/c7f46be))
 * **package:** add bundle size stat, add builtins test ([6dce3d5](https://github.com/liangchunn/twirler/commit/6dce3d5))
+* **process:** add process handler ([6937147](https://github.com/liangchunn/twirler/commit/6937147))
 
 
 
